@@ -110,7 +110,7 @@
                         <div class="text-center"><div id="countdown-seconds" class="text-4xl md:text-6xl font-bold text-white">00</div><div class="text-sm uppercase text-gray-400">Seconds</div></div>
                     </div>
                 </div>
-                <button onclick="openModal()" data-content-key="incentive.ctaButton" class="mt-10 inline-block bg-white text-solar-blue px-10 py-4 rounded-full text-lg font-bold uppercase tracking-wider shadow-lg hover:bg-gray-200 transition-all transform hover:scale-105"></button>
+                <button onclick="openTaxCreditModal()" data-content-key="incentive.ctaButton" class="mt-10 inline-block bg-white text-solar-blue px-10 py-4 rounded-full text-lg font-bold uppercase tracking-wider shadow-lg hover:bg-gray-200 transition-all transform hover:scale-105"></button>
             </div>
         </section>
 
@@ -172,6 +172,7 @@
                 </div>
                  <div class="text-center mt-12">
                      <button onclick="openModal()" data-content-key="calculator.ctaButton" class="inline-block bg-solar-yellow text-solar-blue px-10 py-4 rounded-full text-lg font-bold uppercase tracking-wider shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"></button>
+                    <p data-content-key="calculator.ctaSubtitle" class="text-sm text-gray-400 mt-3"></p>
                     <p data-content-key="calculator.disclaimer" class="text-xs text-gray-500 mt-4 max-w-md mx-auto"></p>
                 </div>
             </div>
@@ -185,6 +186,7 @@
         </div>
     </footer>
 
+    <!-- Quote Form Modal -->
     <div id="quote-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden" role="dialog" aria-modal="true">
         <div id="modal-content" class="relative bg-gray-800 rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
              <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-400 hover:text-white transition-colors z-10" aria-label="Close">
@@ -216,6 +218,19 @@
         </div>
     </div>
 
+    <!-- Tax Credit Info Modal -->
+    <div id="tax-credit-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden" role="dialog" aria-modal="true">
+        <div id="tax-credit-modal-content" class="relative bg-gray-800 rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+             <button onclick="closeTaxCreditModal()" class="absolute top-3 right-3 text-gray-400 hover:text-white transition-colors z-10" aria-label="Close">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <div id="tax-credit-modal-container" class="p-8 md:p-10">
+                <!-- Content is populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+
     <!-- ====================================================================================== -->
     <!-- === JAVASCRIPT LOGIC ================================================================= -->
     <!-- ====================================================================================== -->
@@ -232,7 +247,7 @@
     const SITE_CONFIG = {
         // --- Company Details ---
         company: {
-            name: "Solar DE",
+            name: "Solar Delaware",
         },
         // --- Formspree Endpoint ---
         // Go to formspree.io, create a new form, and paste the endpoint URL here.
@@ -253,7 +268,7 @@
         hero: {
             // This H1 headline is hard-coded in the HTML for best SEO.
             // You can edit it directly in the <H1> tag if needed.
-            subheadline: "Swap your unpredictable electric bill for a fixed, lower solar payment. Qualify for the Delaware Solar Credit and start saving today.",
+            subheadline: "Swap your unpredictable electric bill for a fixed, lower solar payment. Our systems can <strong class='text-solar-yellow'><u>offset 100% of your bill</u></strong>. Qualify for the Delaware Solar Credit and start saving today.",
             ctaButton: "See If You Qualify Now",
             // Paste the URL for your desired background image here.
             backgroundImageUrl: "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg?cs=srgb&dl=pexels-pixabay-356036.jpg&fm=jpg",
@@ -266,33 +281,33 @@
             items: [
                 { 
                     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm1.5 0a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" /></svg>`,
-                    title: "Eliminate Electric Bills",
-                    description: "Lock in a low, fixed monthly payment for your solar system. Once it's paid off, you generate your own free power for life.",
+                    title: "Swap Your Electric Bill",
+                    description: "Replace your volatile utility payment with a <strong><u>low, fixed monthly solar payment</u></strong>. Once it's paid off, you generate your own FREE power for life.",
                 },
                 {
                     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>`,
                     title: "Increase Home Value",
-                    description: "Homes with solar panels sell faster and for more money. It's an investment that pays you back in more ways than one.",
+                    description: "Homes with solar panels sell faster and for an average of <strong>4.1% more</strong>. It's an investment that pays you back in more ways than one.",
                 },
                 {
                     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286Zm0 13.036h.008v.008h-.008v-.008Z" /></svg>`,
                     title: "Energy Independence",
-                    description: "Protect yourself from rising utility rates and power grid instability. With solar, you control your own energy production.",
+                    description: "Protect yourself from <strong><u>rising utility rates</u></strong> and power grid instability. With solar, you control your own energy production.",
                 },
                 {
                     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 0 1 5.814-5.519l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" /></svg>`,
                     title: "Hedge Against Inflation",
-                    description: "Electricity prices have risen consistently. A fixed solar payment is one of the smartest ways to budget for the future and save long-term.",
+                    description: "Electricity prices rise consistently. A fixed solar payment is one of the smartest ways to budget for the future and <strong>save long-term</strong>.",
                 },
             ]
         },
 
         // --- Incentive Section ---
         incentive: {
-            title: `The <span class="text-solar-yellow">$6,000 Delaware</span> Solar Credit`,
+            title: `The <span class="text-solar-yellow text-5xl md:text-6xl font-black">$6,000 Delaware</span> Solar Credit`,
             subtitle: "This incredible state incentive makes going solar cheaper than ever, but it expires soon!",
             countdownTitle: "OFFER ENDS WITH THE YEAR",
-            ctaButton: "Claim Your Credit",
+            ctaButton: "Learn More & Claim",
         },
 
         // --- How It Works Section ---
@@ -312,22 +327,22 @@
             subtitle: "We only use best-in-class components for maximum performance and longevity.",
             items: [
                 {
-                    imageUrl: "https://images.unsplash.com/photo-1549740425-5e9ed4d8cd34?q=80&w=800&auto=format&fit=crop",
+                    imageUrl: "https://5.imimg.com/data5/ANDROID/Default/2024/7/436852109/UF/PK/XR/89279058/product-jpeg-500x500.jpg",
                     altText: "High-efficiency monocrystalline solar panel for Delaware homes",
                     title: "Tier-1 Solar Panels",
                     description: "We install high-performance Tier-1 monocrystalline panels, known for superior efficiency and a sleek black appearance, generating more power in less space.",
                 },
                 {
-                    imageUrl: "https://images.unsplash.com/photo-1632832388081-62d4a234d7a8?q=80&w=800&auto=format&fit=crop",
-                    altText: "Smart solar inverter system with real-time monitoring",
-                    title: "Smart Inverter System",
-                    description: "The brain of your solar system. Our smart inverters provide real-time performance monitoring and are ready for future battery integration.",
+                    imageUrl: "https://www.nasdaq.com/sites/acquia.prod/files/gobankingrates/solar-panel-tech-stock-iStock-971089548.jpg",
+                    altText: "A solar installation expert working on a roof",
+                    title: "Expert Installation",
+                    description: "Our certified and insured teams are masters of their craft, ensuring a flawless and efficient installation process from start to finish.",
                 },
                 {
-                    imageUrl: "https://images.unsplash.com/photo-1590153835579-0545938f3074?q=80&w=800&auto=format&fit=crop",
-                    altText: "A sealed document representing an ironclad 25-year warranty",
+                    imageUrl: "https://www.positiveenergysolar.com/wp-content/uploads/2025/03/Certified_Provider_Badge.2407181547522-1024x791.png",
+                    altText: "A modern home with a clean solar panel installation on the roof",
                     title: "Ironclad 25-Year Warranty",
-                    description: "Your investment is protected by a comprehensive 25-year warranty covering panel performance, product defects, and workmanship. Total peace of mind.",
+                    description: "Your investment is protected by a comprehensive 25-year panel warranty, plus a <strong class='text-solar-yellow'><u>lifetime workmanship guarantee</u></strong>. Total peace of mind.",
                 }
             ]
         },
@@ -345,7 +360,8 @@
             chartTitle: "Cost Over 25 Years",
             chartLabelUtility: "Projected Utility Cost",
             chartLabelSolar: "Fixed Solar Cost",
-            ctaButton: "Lock In Your Savings",
+            ctaButton: "Get My Free Consultation",
+            ctaSubtitle: "Free, No-Pressure Consultation",
             disclaimer: "This is an estimate for informational purposes only. A free, detailed quote will provide exact figures for your property.",
         },
         
@@ -364,6 +380,36 @@
             successTitle: "Thank You!",
             successMessage: "Your request has been sent. A solar expert will be in touch with you shortly.",
             successCloseButton: "Close",
+        },
+
+        // --- Tax Credit Info Modal ---
+        taxCreditModal: {
+            title: "Unlocking Delaware's Solar Incentives",
+            subtitle: "Here's a breakdown of how you save big with state and federal programs.",
+            sections: [
+                {
+                    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182.553-.44 1.278-.659 2.003-.659 1.5 0 2.85.996 3.449 2.167m-5.449-2.167.956-1.639M12 18.75h.008v.008H12v-.008Z" /></svg>`,
+                    title: "30% Federal Investment Tax Credit (ITC)",
+                    description: "The federal government offers a tax credit for <strong><u>30% of the total cost</u></strong> of your solar panel system. This is a dollar-for-dollar reduction in your federal income taxes.",
+                    details: [
+                        "No cap on the credit amount.",
+                        "Applies to both equipment and installation costs.",
+                        "Can be carried forward to future tax years if needed."
+                    ]
+                },
+                {
+                    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18h16.5M5.25 6h13.5m-13.5 3h13.5m-13.5 3h13.5m-13.5 3h13.5M3 3v18h18V3H3Z" /></svg>`,
+                    title: "$6,000 Delaware State Tax Credit",
+                    description: "Delaware provides an incredible state-level credit, making it one of the best states for solar. This directly reduces your state tax liability.",
+                    details: [
+                        "Up to <strong>$6,000 credit</strong> for residential systems.",
+                        "Managed by the DNREC Green Energy Program.",
+                        "This program has an annual cap and funds are limited, so <u>acting fast is crucial</u>."
+                    ]
+                }
+            ],
+            ctaButton: "Start My Free Consultation",
+            sourceInfo: "Information based on data from DNREC and the Solar Energy Industries Association (SEIA). Consult a tax professional for personalized advice."
         }
     };
 
@@ -387,7 +433,7 @@
             
             // Hero
             document.getElementById('hero-background').style.backgroundImage = `url('${SITE_CONFIG.hero.backgroundImageUrl}')`;
-            document.querySelector('[data-content-key="hero.subheadline"]').textContent = SITE_CONFIG.hero.subheadline;
+            document.querySelector('[data-content-key="hero.subheadline"]').innerHTML = SITE_CONFIG.hero.subheadline;
             document.querySelector('[data-content-key="hero.ctaButton"]').textContent = SITE_CONFIG.hero.ctaButton;
             
             // Benefits
@@ -425,10 +471,10 @@
             document.querySelector('[data-content-key="technology.subtitle"]').textContent = SITE_CONFIG.technology.subtitle;
             const techContainer = document.querySelector('[data-content-key="technology.items"]');
             techContainer.innerHTML = SITE_CONFIG.technology.items.map(item => `
-                <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col">
                     <img src="${item.imageUrl}" alt="${item.altText}" class="rounded-md mb-4 w-full h-48 object-cover">
                     <h3 class="text-xl font-bold text-white">${item.title}</h3>
-                    <p class="text-gray-400 mt-2">${item.description}</p>
+                    <p class="text-gray-400 mt-2 flex-grow">${item.description}</p>
                 </div>
             `).join('');
 
@@ -437,6 +483,7 @@
             document.querySelector('[data-content-key="calculator.subtitle"]').textContent = SITE_CONFIG.calculator.subtitle;
             document.querySelector('[data-content-key="calculator.sliderLabel"]').textContent = SITE_CONFIG.calculator.sliderLabel;
             document.querySelector('[data-content-key="calculator.ctaButton"]').textContent = SITE_CONFIG.calculator.ctaButton;
+            document.querySelector('[data-content-key="calculator.ctaSubtitle"]').textContent = SITE_CONFIG.calculator.ctaSubtitle;
             document.querySelector('[data-content-key="calculator.disclaimer"]').textContent = SITE_CONFIG.calculator.disclaimer;
             document.querySelector('[data-content-key="calculator.chartTitle"]').textContent = SITE_CONFIG.calculator.chartTitle;
             document.querySelector('[data-content-key="calculator.chartLabelUtility"]').textContent = SITE_CONFIG.calculator.chartLabelUtility;
@@ -448,7 +495,6 @@
                     <p class="text-3xl font-bold text-white">${metric.prefix}<span id="${metric.id}">0</span>${metric.suffix}</p>
                 </div>
             `).join('');
-            // Fix for yellow text on first metric
             metricsContainer.firstElementChild.querySelector('.text-3xl').classList.replace('text-white', 'text-solar-yellow');
 
             // Footer
@@ -462,13 +508,42 @@
             document.querySelector('[data-content-key="form.successTitle"]').textContent = SITE_CONFIG.form.successTitle;
             document.querySelector('[data-content-key="form.successMessage"]').textContent = SITE_CONFIG.form.successMessage;
             document.querySelector('[data-content-key="form.successCloseButton"]').textContent = SITE_CONFIG.form.successCloseButton;
+
+            // Tax Credit Modal
+            const taxModalContainer = document.getElementById('tax-credit-modal-container');
+            const taxModalConfig = SITE_CONFIG.taxCreditModal;
+            let sectionsHtml = taxModalConfig.sections.map(section => `
+                <div class="flex items-start space-x-4 mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-solar-blue rounded-full">${section.icon}</div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-1">${section.title}</h4>
+                        <p class="text-gray-400">${section.description}</p>
+                        <ul class="mt-2 list-disc list-inside text-gray-400 space-y-1">
+                            ${section.details.map(detail => `<li>${detail}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `).join('<hr class="border-gray-700 my-6">');
+            taxModalContainer.innerHTML = `
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-extrabold text-white">${taxModalConfig.title}</h2>
+                    <p class="text-md text-gray-400 mt-2">${taxModalConfig.subtitle}</p>
+                </div>
+                ${sectionsHtml}
+                <div class="text-center mt-8">
+                    <button onclick="switchToQuoteModal()" class="w-full md:w-auto bg-solar-yellow text-solar-blue px-10 py-3 rounded-full text-lg font-bold uppercase tracking-wider shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105">${taxModalConfig.ctaButton}</button>
+                </div>
+                <p class="text-xs text-gray-600 text-center mt-6">${taxModalConfig.sourceInfo}</p>
+            `;
         }
         populateContent();
 
         // --- SELECTORS ---
         const header = document.getElementById('page-header');
-        const modal = document.getElementById('quote-modal');
-        const modalContent = document.getElementById('modal-content');
+        const quoteModal = document.getElementById('quote-modal');
+        const quoteModalContent = document.getElementById('modal-content');
+        const taxCreditModal = document.getElementById('tax-credit-modal');
+        const taxCreditModalContent = document.getElementById('tax-credit-modal-content');
         const contactForm = document.getElementById('contact-form');
         const formSubmitButton = document.getElementById('form-submit-button');
 
@@ -479,24 +554,65 @@
             header.classList.toggle('shadow-lg', window.scrollY > 10);
         });
 
+        // --- SMOOTH SCROLL NAVIGATION ---
+        document.querySelectorAll('header a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
         // --- MODAL LOGIC ---
+        function updateBodyScroll() {
+            if (quoteModal.classList.contains('hidden') && taxCreditModal.classList.contains('hidden')) {
+                document.body.style.overflow = 'unset';
+            } else {
+                document.body.style.overflow = 'hidden';
+            }
+        }
         window.openModal = () => {
-            modal.classList.remove('hidden');
-            modal.classList.add('animate-fade-in');
-            modalContent.classList.add('animate-fade-in-up');
-            document.body.style.overflow = 'hidden';
+            quoteModal.classList.remove('hidden');
+            quoteModal.classList.add('animate-fade-in');
+            quoteModalContent.classList.add('animate-fade-in-up');
+            updateBodyScroll();
         };
         window.closeModal = () => {
-            modal.classList.add('hidden');
-            document.body.style.overflow = 'unset';
+            quoteModal.classList.add('hidden');
             document.getElementById('form-view').classList.remove('hidden');
             document.getElementById('success-view').classList.add('hidden');
             contactForm.reset();
+            updateBodyScroll();
         };
-        modal.addEventListener('click', closeModal);
-        modalContent.addEventListener('click', (e) => e.stopPropagation());
+        window.openTaxCreditModal = () => {
+            taxCreditModal.classList.remove('hidden');
+            taxCreditModal.classList.add('animate-fade-in');
+            taxCreditModalContent.classList.add('animate-fade-in-up');
+            updateBodyScroll();
+        };
+        window.closeTaxCreditModal = () => {
+            taxCreditModal.classList.add('hidden');
+            updateBodyScroll();
+        };
+        window.switchToQuoteModal = () => {
+            closeTaxCreditModal();
+            setTimeout(openModal, 200);
+        };
+        quoteModal.addEventListener('click', closeModal);
+        quoteModalContent.addEventListener('click', (e) => e.stopPropagation());
+        taxCreditModal.addEventListener('click', closeTaxCreditModal);
+        taxCreditModalContent.addEventListener('click', (e) => e.stopPropagation());
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Escape') {
+                closeModal();
+                closeTaxCreditModal();
+            }
         });
 
         // --- FOOTER COPYRIGHT YEAR ---
