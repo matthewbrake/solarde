@@ -8,14 +8,45 @@
     ======================================================================================
     === EDITABLE SEO & METADATA ==========================================================
     ======================================================================================
-    This section is critical for search engines. Edit the title and description to match
-    your primary keywords and location.
-    ======================================================================================
     -->
-    <title>Delaware Solar Panel Installation | Solar DE | Get a Free Quote</title>
-    <meta name="description" content="Expert solar panel installation in Delaware. Lower your electric bill, claim the $6,000 DE tax credit, and increase your home value. Get your free solar savings estimate today!">
-    <meta name="keywords" content="solar panels Delaware, solar installation Delaware, DE solar tax credit, solar company Delaware, go solar Delaware, renewable energy Delaware, solar power Wilmington, solar Newark DE">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>New Castle Solar Panel Installation | Solar Delaware | Free Quote</title>
+    <meta name="description" content="Top-rated solar panel installation in New Castle, DE & across Delaware. Lock in savings, claim state & federal tax credits. See your savings with our free calculator!">
+    <meta name="keywords" content="solar panels New Castle DE, solar installation Delaware, solar company New Castle County, DE solar tax credit, residential solar Delaware, go solar Wilmington DE">
+    
+    <!-- 
+    FAVICON: This is an inline SVG favicon. It loads instantly and requires no extra files.
+    To replace it, create a 1:1 aspect ratio SVG, run it through an online "SVG to URL encoder", 
+    and paste the resulting 'data:image/svg+xml,...' URL into the href attribute below.
+    -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFCA28'%3E%3Cpath d='M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.106a.75.75 0 0 1 0 1.06l-1.591 1.592a.75.75 0 0 1-1.06-1.061l1.591-1.591a.75.75 0 0 1 1.06 0ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5h2.25a.75.75 0 0 1 .75.75ZM17.836 17.836a.75.75 0 0 1-1.06 0l-1.591-1.591a.75.75 0 1 1 1.06-1.06l1.591 1.591a.75.75 0 0 1 0 1.06ZM12 21a.75.75 0 0 1-.75-.75v-2.25a.75.75 0 0 1 1.5 0v2.25a.75.75 0 0 1-.75-.75ZM5.106 18.894a.75.75 0 0 1 0-1.06l1.591-1.592a.75.75 0 0 1 1.06 1.061l-1.591 1.591a.75.75 0 0 1-1.06 0ZM3 12a.75.75 0 0 1 .75-.75h2.25a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12ZM6.164 6.164a.75.75 0 0 1 1.06 0l1.591 1.591a.75.75 0 1 1-1.06 1.06l-1.591-1.591a.75.75 0 0 1 0-1.06Z' /%3E%3C/svg%3E">
+
+    <!-- 
+    STRUCTURED DATA (JSON-LD): This tells Google you are a local business.
+    IMPORTANT: Update the placeholder details below (telephone, address, url)
+    -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HomeAndConstructionBusiness",
+      "name": "Solar Delaware",
+      "description": "Expert solar panel installation services for residential properties in Delaware, including New Castle, Kent, and Sussex counties.",
+      "telephone": "+1-302-555-0101",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Wilmington",
+        "addressRegion": "DE",
+        "postalCode": "19801",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Delaware"
+      },
+      "serviceType": "Solar panel installation",
+      "url": "https://www.solardelaware.com"
+    }
+    </script>
+    
     <!-- 
     ======================================================================================
     === STYLES & FONTS (No editing needed) ===============================================
@@ -53,6 +84,11 @@
         ::-webkit-scrollbar-track { background: #1a202c; }
         ::-webkit-scrollbar-thumb { background: #0D47A1; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #1e60c5; }
+        /* FAQ Accordion */
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+        .faq-toggle:checked ~ .faq-content { max-height: 500px; }
+        .faq-arrow { transition: transform 0.3s ease-out; }
+        .faq-toggle:checked ~ .faq-label .faq-arrow { transform: rotate(180deg); }
     </style>
 </head>
 
@@ -86,6 +122,13 @@
                 <button onclick="openModal()" data-content-key="hero.ctaButton" class="inline-block bg-solar-yellow text-solar-blue px-10 py-4 rounded-full text-lg font-bold uppercase tracking-wider shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"></button>
             </div>
         </section>
+
+        <section id="service-area" class="py-4 bg-solar-blue/80 text-center">
+            <div class="container mx-auto px-6">
+                <p data-content-key="serviceArea.text" class="text-lg font-semibold text-solar-yellow tracking-wider"></p>
+            </div>
+        </section>
+
 
         <section id="benefits" class="py-20 bg-gray-900">
             <div class="container mx-auto px-6">
@@ -177,6 +220,18 @@
                 </div>
             </div>
         </section>
+        
+        <section id="faq" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6 max-w-4xl">
+                 <div class="text-center mb-12">
+                    <h2 data-content-key="faq.title" class="text-4xl font-extrabold text-white"></h2>
+                    <p data-content-key="faq.subtitle" class="text-lg text-gray-400 mt-2"></p>
+                </div>
+                <div id="faq-container" class="space-y-4">
+                    <!-- FAQ items will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
     </main>
     
     <footer class="bg-gray-900 border-t border-gray-800">
@@ -260,6 +315,7 @@
                 { text: "Tax Credit", href: "#incentive" },
                 { text: "Process", href: "#how-it-works" },
                 { text: "Savings", href: "#calculator" },
+                { text: "FAQ", href: "#faq" },
             ],
             ctaButton: "Free Estimate",
         },
@@ -268,16 +324,21 @@
         hero: {
             // This H1 headline is hard-coded in the HTML for best SEO.
             // You can edit it directly in the <H1> tag if needed.
-            subheadline: "Swap your unpredictable electric bill for a fixed, lower solar payment. Our systems can <strong class='text-solar-yellow'><u>offset 100% of your bill</u></strong>. Qualify for the Delaware Solar Credit and start saving today.",
+            subheadline: "Serving New Castle, Kent, and Sussex counties. Swap your electric bill for a fixed, lower solar payment. Qualify for the Delaware Solar Credit and start saving today.",
             ctaButton: "See If You Qualify Now",
             // Paste the URL for your desired background image here.
             backgroundImageUrl: "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg?cs=srgb&dl=pexels-pixabay-356036.jpg&fm=jpg",
         },
 
+        // --- Service Area ---
+        serviceArea: {
+            text: "Proudly Serving All of Delaware: New Castle County • Kent County • Sussex County",
+        },
+
         // --- Benefits Section ---
         benefits: {
             title: "Why Go Solar in Delaware?",
-            subtitle: "The advantages are brighter than you think.",
+            subtitle: "The advantages are brighter than you think, especially in the First State.",
             items: [
                 { 
                     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm1.5 0a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" /></svg>`,
@@ -285,7 +346,7 @@
                     description: "Replace your volatile utility payment with a <strong><u>low, fixed monthly solar payment</u></strong>. Once it's paid off, you generate your own FREE power for life.",
                 },
                 {
-                    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>`,
+                    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21L.94 18.061a9 9 0 011.33-10.517l.926-.926a9 9 0 0112.728 0l.926.926a9 9 0 011.33 10.517L21.75 21M9 12.75l.48-2.522a2.25 2.25 0 012.14-1.928h.76a2.25 2.25 0 012.14 1.928l.48 2.522M12 18a.75.75 0 01.75-.75h.008a.75.75 0 010 1.5H12.75A.75.75 0 0112 18z" /></svg>`,
                     title: "Increase Home Value",
                     description: "Homes with solar panels sell faster and for an average of <strong>4.1% more</strong>. It's an investment that pays you back in more ways than one.",
                 },
@@ -363,8 +424,44 @@
             ctaButton: "Get My Free Consultation",
             ctaSubtitle: "Free, No-Pressure Consultation",
             disclaimer: "This is an estimate for informational purposes only. A free, detailed quote will provide exact figures for your property.",
+            // --- Parameters for the savings calculation. Edit these to fine-tune the estimates. ---
+            calculationParameters: {
+                utilityRateIncrease: 0.04,      // Annual increase in utility electricity cost (e.g., 0.04 = 4%)
+                solarSystemCostPerWatt: 3.0,    // Average cost per watt for a solar system installation
+                avgKwhCost: 0.14,               // Average cost per kilowatt-hour from the utility in your area
+                solarProductionFactor: 1200,    // Annual kWh produced per 1 kW of solar panels installed (adjust for local climate)
+                loanTermYears: 20,              // The term length of the solar loan in years
+                loanInterestRate: 0.05,         // The interest rate for the solar loan (e.g., 0.05 = 5%)
+                federalTaxCreditRate: 0.30,     // Federal tax credit as a percentage (e.g., 0.30 = 30%)
+                deStateCredit: 6000,            // The flat Delaware state tax credit amount in dollars
+                homeValueIncreasePerWatt: 4.0,  // Estimated increase in home value per watt of solar installed
+            }
         },
         
+        // --- FAQ Section ---
+        faq: {
+            title: "Frequently Asked Questions",
+            subtitle: "Have questions about going solar in Delaware? We have answers.",
+            items: [
+                {
+                    question: "How much do solar panels actually cost in Delaware?",
+                    answer: "The final cost varies by home, but Delaware's incentives drastically lower the price. After the <strong>30% Federal Tax Credit</strong> and the <strong>$6,000 State Credit</strong>, a typical system becomes highly affordable. Many homeowners can get started for $0 down and replace their utility bill with a lower, fixed solar payment."
+                },
+                {
+                    question: "How long do solar panels last?",
+                    answer: "Modern Tier-1 solar panels are incredibly durable. We provide an industry-leading <strong>25-year manufacturer's warranty</strong> that guarantees their production. You can expect your panels to continue generating clean energy for 30 years or more."
+                },
+                {
+                    question: "What happens on cloudy days or at night?",
+                    answer: "Your system produces excess energy on sunny days, which is sent back to the grid for credits (this is called net metering). At night or on cloudy days, you automatically draw power from the grid using those credits. This ensures you always have power when you need it."
+                },
+                {
+                    question: "Does solar work during a power outage?",
+                    answer: "Standard grid-tied solar systems are required by law to shut down during a power outage to protect utility workers. However, you can add a <strong>solar battery storage</strong> system to your installation. This allows you to store excess solar energy and use it to power your home independently during an outage."
+                },
+            ]
+        },
+
         // --- Footer ---
         footer: {
             copyrightName: "Solar Delaware",
@@ -435,6 +532,9 @@
             document.getElementById('hero-background').style.backgroundImage = `url('${SITE_CONFIG.hero.backgroundImageUrl}')`;
             document.querySelector('[data-content-key="hero.subheadline"]').innerHTML = SITE_CONFIG.hero.subheadline;
             document.querySelector('[data-content-key="hero.ctaButton"]').textContent = SITE_CONFIG.hero.ctaButton;
+
+            // Service Area
+            document.querySelector('[data-content-key="serviceArea.text"]').innerHTML = SITE_CONFIG.serviceArea.text;
             
             // Benefits
             document.querySelector('[data-content-key="benefits.title"]').textContent = SITE_CONFIG.benefits.title;
@@ -497,6 +597,25 @@
             `).join('');
             metricsContainer.firstElementChild.querySelector('.text-3xl').classList.replace('text-white', 'text-solar-yellow');
 
+            // FAQ
+            document.querySelector('[data-content-key="faq.title"]').textContent = SITE_CONFIG.faq.title;
+            document.querySelector('[data-content-key="faq.subtitle"]').textContent = SITE_CONFIG.faq.subtitle;
+            const faqContainer = document.getElementById('faq-container');
+            faqContainer.innerHTML = SITE_CONFIG.faq.items.map((item, index) => `
+                <div class="bg-gray-800 rounded-lg">
+                    <input type="checkbox" id="faq-${index}" class="hidden faq-toggle">
+                    <label for="faq-${index}" class="faq-label flex justify-between items-center p-6 cursor-pointer">
+                        <h3 class="text-lg font-bold text-white">${item.question}</h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-solar-yellow faq-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </label>
+                    <div class="faq-content">
+                        <div class="p-6 pt-0 text-gray-400">
+                            <p>${item.answer}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
             // Footer
             document.querySelector('[data-content-key="footer.tagline"]').textContent = SITE_CONFIG.footer.tagline;
 
@@ -555,7 +674,7 @@
         });
 
         // --- SMOOTH SCROLL NAVIGATION ---
-        document.querySelectorAll('header a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
@@ -649,7 +768,8 @@
             talkingPoints: document.getElementById('calculator-talking-points'),
             formBillInput: document.getElementById('averageBill')
         };
-        const solarConfig = { utilityRateIncrease: 0.04, solarSystemCostPerWatt: 3.0, avgKwhCost: 0.14, solarProductionFactor: 1200, loanTermYears: 20, loanInterestRate: 0.05, federalTaxCreditRate: 0.30, deStateCredit: 6000, homeValueIncreasePerWatt: 4.0 };
+        const solarConfig = SITE_CONFIG.calculator.calculationParameters;
+        
         function calculateSavings(monthlyBill, cfg) {
             const yearlyBill = monthlyBill * 12;
             const yearlyKwhUsage = yearlyBill / cfg.avgKwhCost;
@@ -659,16 +779,34 @@
             const federalCredit = systemCost * cfg.federalTaxCreditRate;
             const netCost = systemCost - federalCredit - cfg.deStateCredit;
             const homeValueIncrease = systemSizeWatts * cfg.homeValueIncreasePerWatt;
-            const r = cfg.loanInterestRate / 12, n = cfg.loanTermYears * 12;
+            const r = cfg.loanInterestRate / 12;
+            const n = cfg.loanTermYears * 12;
             const monthlySolarPayment = netCost > 0 ? (netCost * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1) : 0;
             const totalSolarCost = monthlySolarPayment * n;
+
             let cumulativeUtilityCost = 0, paybackPeriod = 0;
             const utilityCostChart = [], solarCostChart = [];
             let currentYearlyBill = yearlyBill;
+            
+            // New, more accurate payback calculation
+            let cumulativeSavings = -netCost; // Start with the initial investment as a negative balance
+
             for (let year = 1; year <= 25; year++) {
                 cumulativeUtilityCost += currentYearlyBill;
                 const cumulativeSolarCost = year <= cfg.loanTermYears ? monthlySolarPayment * 12 * year : totalSolarCost;
-                if (!paybackPeriod && cumulativeSolarCost > 0 && cumulativeUtilityCost > cumulativeSolarCost) paybackPeriod = year;
+
+                // Payback Logic: Track when savings overcome the initial investment.
+                const yearlySolarPayment = year <= cfg.loanTermYears ? monthlySolarPayment * 12 : 0;
+                const yearlySavings = currentYearlyBill - yearlySolarPayment;
+                cumulativeSavings += yearlySavings;
+                
+                if (!paybackPeriod && cumulativeSavings >= 0) {
+                    // Refine payback to be more precise (e.g., 8.4 years)
+                    const prevCumulativeSavings = cumulativeSavings - yearlySavings;
+                    const partOfYear = Math.abs(prevCumulativeSavings) / yearlySavings;
+                    paybackPeriod = (year - 1 + partOfYear).toFixed(1);
+                }
+
                 utilityCostChart.push(cumulativeUtilityCost);
                 solarCostChart.push(cumulativeSolarCost);
                 currentYearlyBill *= (1 + cfg.utilityRateIncrease);
@@ -678,7 +816,9 @@
             const normalize = (val) => maxVal > 0 ? (val / maxVal) * 100 : 0;
             return { lifetimeSavings, paybackPeriod, homeValueIncrease, monthlySolarPayment, chartData: { utility: utilityCostChart.map(normalize), solar: solarCostChart.map(normalize) } };
         }
+
         function formatCurrency(value) { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value); }
+        
         function updateCalculatorUI() {
             const monthlyBill = Number(calculatorSelectors.slider.value);
             const calculations = calculateSavings(monthlyBill, solarConfig);
