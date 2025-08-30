@@ -77,8 +77,12 @@
         /* Custom animations */
         @keyframes fadeInUp { '0%': { opacity: '0', transform: 'translateY(20px)' }; '100%': { opacity: '1', transform: 'translateY(0)' }; }
         @keyframes fadeIn { '0%': { opacity: '0' }; '100%': { opacity: '1' }; }
+        @keyframes pulse {
+          '50%': { transform: 'scale(1.05)', boxShadow: '0 0 0 10px rgba(255, 202, 40, 0.3)' }
+        }
         .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
         .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        .animate-pulse-slow { animation: pulse 2s infinite; }
         /* Custom scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #1a202c; }
@@ -119,7 +123,27 @@
                     Stop Renting Your Power. <span class="text-solar-yellow">Own It.</span>
                 </h1>
                 <p data-content-key="hero.subheadline" class="max-w-3xl mx-auto text-lg md:text-xl text-gray-300 mb-8"></p>
-                <button onclick="openModal()" data-content-key="hero.ctaButton" class="inline-block bg-solar-yellow text-solar-blue px-10 py-4 rounded-full text-lg font-bold uppercase tracking-wider shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105"></button>
+                <button onclick="openModal()" data-content-key="hero.ctaButton" class="inline-block bg-solar-yellow text-solar-blue px-10 py-4 rounded-full text-lg font-bold uppercase tracking-wider shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105 animate-pulse-slow"></button>
+            </div>
+        </section>
+
+        <section id="subscription-cta" class="py-16 bg-gray-900 hidden">
+            <div class="container mx-auto px-6 text-center max-w-4xl">
+                 <h2 data-content-key="subscriptionCta.title" class="text-3xl font-extrabold text-white"></h2>
+                 <p data-content-key="subscriptionCta.subtitle" class="text-md text-gray-400 mt-2 mb-8"></p>
+                 <div id="subscription-container" class="max-w-xl mx-auto">
+                    <form id="subscription-form" class="w-full" noValidate>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                             <input type="hidden" name="form-source" value="Subscription">
+                             <input type="email" name="email" id="sub-email" required class="w-full flex-grow bg-gray-800 text-white p-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-solar-yellow text-lg" placeholder="Enter your email address">
+                             <button type="submit" id="sub-submit-button" data-content-key="subscriptionCta.buttonText" class="bg-solar-yellow text-solar-blue px-8 py-4 rounded-md font-bold text-lg hover:bg-yellow-300 transition-all transform hover:scale-105 disabled:bg-gray-500 disabled:cursor-not-allowed"></button>
+                        </div>
+                        <p id="sub-form-error" class="text-red-500 text-sm mt-2 hidden"></p>
+                    </form>
+                    <div id="subscription-success" class="hidden text-center py-4">
+                        <p class="text-lg font-semibold text-solar-yellow">Thank You! You're on the list.</p>
+                    </div>
+                 </div>
             </div>
         </section>
 
@@ -129,8 +153,17 @@
             </div>
         </section>
 
+        <section id="why-delaware" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 data-content-key="whyDelaware.title" class="text-4xl font-extrabold text-white"></h2>
+                    <p data-content-key="whyDelaware.subtitle" class="text-lg text-gray-400 mt-2 max-w-3xl mx-auto"></p>
+                </div>
+                <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8" data-content-key="whyDelaware.items"></div>
+            </div>
+        </section>
 
-        <section id="benefits" class="py-20 bg-gray-900">
+        <section id="benefits" class="py-20 bg-brand-dark">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 data-content-key="benefits.title" class="text-4xl font-extrabold text-white"></h2>
@@ -163,7 +196,7 @@
                     <h2 data-content-key="howItWorks.title" class="text-4xl font-extrabold text-white"></h2>
                     <p data-content-key="howItWorks.subtitle" class="text-lg text-gray-400 mt-2"></p>
                 </div>
-                <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-10 text-center" data-content-key="howItWorks.steps"></div>
+                <div class="max-w-5xl mx-auto" data-content-key="howItWorks.steps"></div>
             </div>
         </section>
 
@@ -330,15 +363,48 @@
             backgroundImageUrl: "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg?cs=srgb&dl=pexels-pixabay-356036.jpg&fm=jpg",
         },
 
+        // --- NEW: Subscription CTA (below hero) ---
+        // To remove this section, just change `enabled: true` to `enabled: false`
+        subscriptionCta: {
+            enabled: true,
+            title: "Stay Ahead of Solar Savings in Delaware",
+            subtitle: "Get free notices about new solar incentives and tax credits. No spam, ever.",
+            placeholder: "Enter your email address",
+            buttonText: "Keep Me Informed"
+        },
+
         // --- Service Area ---
         serviceArea: {
             text: "Proudly Serving All of Delaware: New Castle County • Kent County • Sussex County",
         },
+        
+        // --- Why Delaware Section ---
+        whyDelaware: {
+            title: "Why Delaware is a Top State for Solar",
+            subtitle: "Take advantage of unique state programs that make your investment go even further.",
+            items: [
+                {
+                    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" /></svg>`,
+                    title: "Earn Cash with SRECs",
+                    description: "Delaware's Solar Renewable Energy Credit (SREC) program pays you cash for the clean energy your system generates. It's a second way you profit from solar, on top of your bill savings."
+                },
+                {
+                    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" /></svg>`,
+                    title: "Favorable Net Metering",
+                    description: "Delaware has excellent net metering laws. Your utility company must credit you at the full retail rate for any excess power you send back to the grid, maximizing your savings."
+                },
+                {
+                    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" /></svg>`,
+                    title: "Property Tax Exempt",
+                    description: "While solar panels increase your home's value, Delaware law exempts that added value from your property taxes. You get the benefit without the extra tax burden."
+                },
+            ]
+        },
 
         // --- Benefits Section ---
         benefits: {
-            title: "Why Go Solar in Delaware?",
-            subtitle: "The advantages are brighter than you think, especially in the First State.",
+            title: "The Advantages of Owning Your Power",
+            subtitle: "The benefits are brighter than you think, especially in the First State.",
             items: [
                 { 
                     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm1.5 0a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" /></svg>`,
@@ -346,9 +412,9 @@
                     description: "Replace your volatile utility payment with a <strong><u>low, fixed monthly solar payment</u></strong>. Once it's paid off, you generate your own FREE power for life.",
                 },
                 {
-                    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21L.94 18.061a9 9 0 011.33-10.517l.926-.926a9 9 0 0112.728 0l.926.926a9 9 0 011.33 10.517L21.75 21M9 12.75l.48-2.522a2.25 2.25 0 012.14-1.928h.76a2.25 2.25 0 012.14 1.928l.48 2.522M12 18a.75.75 0 01.75-.75h.008a.75.75 0 010 1.5H12.75A.75.75 0 0112 18z" /></svg>`,
+                    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955a1.125 1.125 0 0 1 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>`,
                     title: "Increase Home Value",
-                    description: "Homes with solar panels sell faster and for an average of <strong>4.1% more</strong>. It's an investment that pays you back in more ways than one.",
+                    description: "Homes with solar panels sell faster and for an average of <strong>4.1% more</strong>, according to Zillow. It's an investment that pays you back in more ways than one.",
                 },
                 {
                     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-solar-yellow"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286Zm0 13.036h.008v.008h-.008v-.008Z" /></svg>`,
@@ -533,8 +599,30 @@
             document.querySelector('[data-content-key="hero.subheadline"]').innerHTML = SITE_CONFIG.hero.subheadline;
             document.querySelector('[data-content-key="hero.ctaButton"]').textContent = SITE_CONFIG.hero.ctaButton;
 
+            // Subscription CTA
+            if (SITE_CONFIG.subscriptionCta.enabled) {
+                const subSection = document.getElementById('subscription-cta');
+                subSection.classList.remove('hidden');
+                document.querySelector('[data-content-key="subscriptionCta.title"]').textContent = SITE_CONFIG.subscriptionCta.title;
+                document.querySelector('[data-content-key="subscriptionCta.subtitle"]').textContent = SITE_CONFIG.subscriptionCta.subtitle;
+                document.querySelector('[data-content-key="subscriptionCta.buttonText"]').textContent = SITE_CONFIG.subscriptionCta.buttonText;
+                document.getElementById('sub-email').placeholder = SITE_CONFIG.subscriptionCta.placeholder;
+            }
+
             // Service Area
             document.querySelector('[data-content-key="serviceArea.text"]').innerHTML = SITE_CONFIG.serviceArea.text;
+
+            // Why Delaware
+            document.querySelector('[data-content-key="whyDelaware.title"]').textContent = SITE_CONFIG.whyDelaware.title;
+            document.querySelector('[data-content-key="whyDelaware.subtitle"]').textContent = SITE_CONFIG.whyDelaware.subtitle;
+            const whyDelawareContainer = document.querySelector('[data-content-key="whyDelaware.items"]');
+            whyDelawareContainer.innerHTML = SITE_CONFIG.whyDelaware.items.map(item => `
+                <div class="bg-gray-800 p-8 rounded-lg shadow-xl text-center transform hover:-translate-y-2 transition-transform duration-300">
+                    <div class="mb-4 inline-block p-4 bg-solar-blue rounded-full">${item.icon}</div>
+                    <h3 class="text-2xl font-bold text-white mb-3">${item.title}</h3>
+                    <p class="text-gray-400">${item.description}</p>
+                </div>
+            `).join('');
             
             // Benefits
             document.querySelector('[data-content-key="benefits.title"]').textContent = SITE_CONFIG.benefits.title;
@@ -558,13 +646,20 @@
             document.querySelector('[data-content-key="howItWorks.title"]').textContent = SITE_CONFIG.howItWorks.title;
             document.querySelector('[data-content-key="howItWorks.subtitle"]').textContent = SITE_CONFIG.howItWorks.subtitle;
             const stepsContainer = document.querySelector('[data-content-key="howItWorks.steps"]');
-            stepsContainer.innerHTML = SITE_CONFIG.howItWorks.steps.map((step, index) => `
-                <div class="flex flex-col items-center">
-                    <div class="flex items-center justify-center w-20 h-20 rounded-full bg-solar-blue text-solar-yellow font-bold text-3xl mb-4">${index + 1}</div>
-                    <h3 class="text-2xl font-bold text-white mb-2">${step.title}</h3>
-                    <p class="text-gray-400">${step.description}</p>
-                </div>
-            `).join('');
+            stepsContainer.classList.add('flex', 'flex-col', 'md:flex-row', 'justify-between', 'items-stretch', 'text-center');
+            stepsContainer.innerHTML = SITE_CONFIG.howItWorks.steps.map((step, index) => {
+                const stepHtml = `
+                    <div class="flex flex-col items-center flex-1 px-4 my-6 md:my-0">
+                        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-solar-blue text-solar-yellow font-bold text-3xl mb-4 z-10 flex-shrink-0">${index + 1}</div>
+                        <h3 class="text-2xl font-bold text-white mb-2">${step.title}</h3>
+                        <p class="text-gray-400">${step.description}</p>
+                    </div>
+                `;
+                const connectorHtml = index < SITE_CONFIG.howItWorks.steps.length - 1 
+                    ? `<div class="flex-grow items-center justify-center hidden md:flex"><div class="w-full h-1 border-t-2 border-dashed border-gray-600 mt-[-6rem]"></div></div>`
+                    : '';
+                return stepHtml + connectorHtml;
+            }).join('');
             
             // Technology
             document.querySelector('[data-content-key="technology.title"]').textContent = SITE_CONFIG.technology.title;
@@ -665,6 +760,7 @@
         const taxCreditModalContent = document.getElementById('tax-credit-modal-content');
         const contactForm = document.getElementById('contact-form');
         const formSubmitButton = document.getElementById('form-submit-button');
+        const subscriptionForm = document.getElementById('subscription-form');
 
         // --- HEADER SCROLL EFFECT ---
         window.addEventListener('scroll', () => {
@@ -788,20 +884,17 @@
             const utilityCostChart = [], solarCostChart = [];
             let currentYearlyBill = yearlyBill;
             
-            // New, more accurate payback calculation
-            let cumulativeSavings = -netCost; // Start with the initial investment as a negative balance
+            let cumulativeSavings = -netCost; 
 
             for (let year = 1; year <= 25; year++) {
                 cumulativeUtilityCost += currentYearlyBill;
                 const cumulativeSolarCost = year <= cfg.loanTermYears ? monthlySolarPayment * 12 * year : totalSolarCost;
 
-                // Payback Logic: Track when savings overcome the initial investment.
                 const yearlySolarPayment = year <= cfg.loanTermYears ? monthlySolarPayment * 12 : 0;
                 const yearlySavings = currentYearlyBill - yearlySolarPayment;
                 cumulativeSavings += yearlySavings;
                 
                 if (!paybackPeriod && cumulativeSavings >= 0) {
-                    // Refine payback to be more precise (e.g., 8.4 years)
                     const prevCumulativeSavings = cumulativeSavings - yearlySavings;
                     const partOfYear = Math.abs(prevCumulativeSavings) / yearlySavings;
                     paybackPeriod = (year - 1 + partOfYear).toFixed(1);
@@ -835,7 +928,7 @@
         calculatorSelectors.slider.addEventListener('input', updateCalculatorUI);
         updateCalculatorUI();
 
-        // --- FORM SUBMISSION LOGIC ---
+        // --- QUOTE FORM SUBMISSION LOGIC ---
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             let isValid = true;
@@ -866,6 +959,48 @@
                 formSubmitButton.textContent = SITE_CONFIG.form.submitButton;
             }
         });
+
+        // --- SUBSCRIPTION FORM SUBMISSION LOGIC ---
+        if (SITE_CONFIG.subscriptionCta.enabled && subscriptionForm) {
+            subscriptionForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const emailInput = document.getElementById('sub-email');
+                const errorP = document.getElementById('sub-form-error');
+                const submitButton = document.getElementById('sub-submit-button');
+                
+                if (!emailInput.value.trim() || !/\S+@\S+\.\S+/.test(emailInput.value)) {
+                    errorP.textContent = 'Please enter a valid email address.';
+                    errorP.classList.remove('hidden');
+                    emailInput.classList.add('border-red-500');
+                    return;
+                }
+                
+                errorP.classList.add('hidden');
+                emailInput.classList.remove('border-red-500');
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+
+                try {
+                    const response = await fetch(SITE_CONFIG.formspreeEndpoint, {
+                        method: 'POST',
+                        body: JSON.stringify(Object.fromEntries(new FormData(subscriptionForm))),
+                        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+                    });
+                    if (response.ok) {
+                        document.getElementById('subscription-form').classList.add('hidden');
+                        document.getElementById('subscription-success').classList.remove('hidden');
+                    } else {
+                        throw new Error('Subscription submission failed');
+                    }
+                } catch (error) {
+                    console.error('Subscription form error:', error);
+                    errorP.textContent = 'Submission failed. Please try again.';
+                    errorP.classList.remove('hidden');
+                    submitButton.disabled = false;
+                    submitButton.textContent = SITE_CONFIG.subscriptionCta.buttonText;
+                }
+            });
+        }
     });
     </script>
 </body>
